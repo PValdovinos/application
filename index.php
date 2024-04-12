@@ -1,5 +1,7 @@
 <?php
 
+// Pedro Valdovinos Reyes, 4/11/2024, php to instantiate Fat-Free-Framework
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 // 328/diner/index.php
