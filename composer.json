@@ -1,0 +1,14 @@
+{
+  "name" : "pvaldovinos/328/application",
+  "authors" : [
+    {
+      "name" : "Pedro Valdovinos Reyes",
+      "email" : "ptreyes2@gmail.com"
+    }
+  ],
+  "require" :
+  {
+    "bcosca/fatfree-core" : "dev-master"
+
+  }
+}
