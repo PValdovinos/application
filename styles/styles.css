@@ -1,3 +1,10 @@
 .img-column img {
     float: right;
 }
+
+.button-container {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
