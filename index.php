@@ -26,7 +26,9 @@ $f3->route('GET /', function($f3){
 $f3->route('GET|POST /apply', function($f3){
 
     // If form is submitted
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+
         // Retrieve form data
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
@@ -42,10 +44,13 @@ $f3->route('GET|POST /apply', function($f3){
         $_SESSION['phone'] = $phone;
 
         // Redirect to confirmation page
-        $f3->reroute('/confirmation');
-    } else {
+        $f3->reroute('/personal-info');
+    } else
+    {
+
         // If form is not submitted, render personal information page
         echo '<h1>Personal Information Page</h1>';
+
         // Render a view page
         $view = new Template();
         echo $view->render('views/personal-information.html');
@@ -53,7 +58,7 @@ $f3->route('GET|POST /apply', function($f3){
 });
 
 // Define confirmation route
-$f3->route('GET /confirmation', function($f3){
+$f3->route('GET|POST /confirmation', function($f3){
 
     // Render confirmation page
     echo '<h1>Confirmation Page</h1>';
@@ -65,4 +70,4 @@ $f3->route('GET /confirmation', function($f3){
 // Run Fat-Free
 $f3->run();
 
-?>
+
