@@ -8,6 +8,9 @@ error_reporting(E_ALL);
 // Include the Fat-Free Framework
 require_once ('vendor/autoload.php');
 
+// Start the session
+session_start();
+
 // Instantiate base class
 $f3 = Base::instance();
 
@@ -31,12 +34,12 @@ $f3->route('GET|POST /apply', function($f3){
         $state = $_POST['state'];
         $phone = $_POST['phone'];
 
-        // Store data in F3 hive for access in template
-        $f3->set('firstName', $firstName);
-        $f3->set('lastName', $lastName);
-        $f3->set('email', $email);
-        $f3->set('state', $state);
-        $f3->set('phone', $phone);
+        // Store data in session
+        $_SESSION['firstName'] = $firstName;
+        $_SESSION['lastName'] = $lastName;
+        $_SESSION['email'] = $email;
+        $_SESSION['state'] = $state;
+        $_SESSION['phone'] = $phone;
 
         // Redirect to confirmation page
         $f3->reroute('/confirmation');
