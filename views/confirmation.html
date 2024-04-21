@@ -5,31 +5,31 @@
 <!-- Display gathered information -->
 <div>
     <h3>Personal Information:</h3>
-    <p>First Name: @SESSION.firstName</p>
-    <p>Last Name: @SESSION.lastName</p>
-    <p>Email: @SESSION.email</p>
-    <p>State: @SESSION.state</p>
-    <p>Phone: @SESSION.phone</p>
+    <p>First Name: {{ @SESSION.firstName }}</p>
+    <p>Last Name: {{ @SESSION.lastName }}</p>
+    <p>Email: {{ @SESSION.email }}</p>
+    <p>State: {{ @SESSION.state }}</p>
+    <p>Phone: {{ @SESSION.phone }}</p>
 </div>
 
 <div>
     <h3>Experience Information:</h3>
-    <p>Biography: @SESSION.biography</p>
-    <p>Github Link: @SESSION.github</p>
-    <p>Years Experience: @SESSION.experience</p>
-    <p>Willing To Relocate: @SESSION.relocate</p>
+    <p>Biography: {{ @SESSION.biography }}</p>
+    <p>Github Link: {{ @SESSION.github }}</p>
+    <p>Years Experience: {{ @SESSION.experience }}</p>
+    <p>Willing To Relocate: {{ @SESSION.relocate }}</p>
 </div>
 
 <div>
     <h3>Mailing Lists:</h3>
     <ul>
-        <repeat group="@SESSION.mailingLists" value="list">
-            <li>@list</li>
+        <repeat group="{{ @SESSION.mailingLists }}" value="{{ @list }}">
+            <li>{{ @list }}</li>
         </repeat>
     </ul>
 </div>
 
-<!-- Submit button (non-functional at this point) -->
+<!-- Submit button (does nothing) -->
 <form method="post" action="#">
     <button type="submit">Submit My Application!</button>
 </form>

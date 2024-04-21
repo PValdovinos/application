@@ -28,7 +28,6 @@ $f3->route('GET|POST /apply', function($f3){
     // If form is submitted
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
-
         // Retrieve form data
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
@@ -36,12 +35,19 @@ $f3->route('GET|POST /apply', function($f3){
         $state = $_POST['state'];
         $phone = $_POST['phone'];
 
-        // Store data in session
-        $_SESSION['firstName'] = $firstName;
-        $_SESSION['lastName'] = $lastName;
-        $_SESSION['email'] = $email;
-        $_SESSION['state'] = $state;
-        $_SESSION['phone'] = $phone;
+        // Echo out form data to check
+        echo "First Name: $firstName<br>";
+        echo "Last Name: $lastName<br>";
+        echo "Email: $email<br>";
+        echo "State: $state<br>";
+        echo "Phone: $phone<br>";
+
+        // Store data in session using Fat-Free syntax
+        $f3->set('SESSION.firstName', $firstName);
+        $f3->set('SESSION.lastName', $lastName);
+        $f3->set('SESSION.email', $email);
+        $f3->set('SESSION.state', $state);
+        $f3->set('SESSION.phone', $phone);
 
         // Redirect to experience page
         $f3->reroute('/experience.html');
@@ -69,13 +75,13 @@ $f3->route('GET|POST /experience', function($f3){
         $experience = $_POST['experience'];
         $relocate = $_POST['relocate'];
 
-        // Store data in session
-        $_SESSION['biography'] = $biography;
-        $_SESSION['github'] = $github;
-        $_SESSION['experience'] = $experience;
-        $_SESSION['relocate'] = $relocate;
+        // Store data in session using Fat-Free syntax
+        $f3->set('SESSION.biography', $biography);
+        $f3->set('SESSION.github', $github);
+        $f3->set('SESSION.experience', $experience);
+        $f3->set('SESSION.relocate', $relocate);
 
-        // Redirect to confirmation page
+        // Redirect to mailing lists page
         $f3->reroute('/mailing-lists.html');
     } else
     {
@@ -92,22 +98,19 @@ $f3->route('GET|POST /experience', function($f3){
 $f3->route('GET|POST /mailing-lists', function($f3){
 
     // If form is submitted
-    if ($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-        // Retrieve selected mailing lists
-        $selectedLists = isset($_POST['mailingLists']) ? $_POST['mailingLists'] : [];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        // Store selected lists in session
-        $_SESSION['mailingLists'] = $selectedLists;
+        // Retrieve form data
+        $mailingLists = $_POST['mailingLists'];
+
+        // Store data in session using Fat-Free syntax
+        $f3->set('SESSION.mailingLists', $mailingLists);
 
         // Redirect to confirmation page
-        $f3->reroute('/confirmation.html');
-    }
-    else
-    {
-        // If form is not submitted, render mailing lists page
+        $f3->reroute('/confirmation');
+    } else {
+        // If form is not submitted, render mailing-lists page
         echo '<h1>Mailing Lists Page</h1>';
-
         // Render a view page
         $view = new Template();
         echo $view->render('views/mailing-lists.html');
