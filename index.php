@@ -28,6 +28,7 @@ $f3->route('GET|POST /apply', function($f3){
     // If form is submitted
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
+
         // Retrieve form data
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
@@ -35,6 +36,7 @@ $f3->route('GET|POST /apply', function($f3){
         $state = $_POST['state'];
         $phone = $_POST['phone'];
 
+        // Store data in session
         $f3->set('SESSION.firstName', $firstName);
         $f3->set('SESSION.lastName', $lastName);
         $f3->set('SESSION.email', $email);
@@ -67,6 +69,7 @@ $f3->route('GET|POST /experience', function($f3){
         $experience = $_POST['experience'];
         $relocate = $_POST['relocate'];
 
+        // Store data in session
         $f3->set('SESSION.biography', $biography);
         $f3->set('SESSION.github', $github);
         $f3->set('SESSION.experience', $experience);
@@ -94,10 +97,11 @@ $f3->route('GET|POST /mailing-lists', function($f3){
         // Retrieve form data
         $mailingLists = $_POST['mailingLists'];
 
+        // Store data in session
         $f3->set('SESSION.mailingLists', $mailingLists);
 
         // Redirect to confirmation page
-        $f3->reroute('/confirmation');
+        $f3->reroute('/confirmation.html');
     } else {
         // If form is not submitted, render mailing-lists page
         echo '<h1>Mailing Lists Page</h1>';
@@ -118,11 +122,5 @@ $f3->route('GET /confirmation', function($f3){
     echo $view->render('views/confirmation.html');
 });
 
-
-// implode to kinda 'stringbuild'
-// variable = implode(", ", $_POST['variable']);
-
 // Run Fat-Free
 $f3->run();
-
-
