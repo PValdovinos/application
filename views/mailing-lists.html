@@ -4,14 +4,50 @@
 
 <!-- Form for mailing list subscriptions -->
 <form method="post" action="/mailing-lists">
-    <label for="softwareJobs">
-        <input type="checkbox" id="softwareJobs" name="mailingLists[]" value="Software Development Jobs">
-        Software Development Jobs
-    </label><br>
-    <label for="industryVerticals">
-        <input type="checkbox" id="industryVerticals" name="mailingLists[]" value="Industry Verticals">
-        Industry Verticals
-    </label><br>
+    <h2>Subscribe to Mailing Lists</h2>
+
+    <fieldset>
+        <legend>Software Development Jobs</legend>
+        <label for="javascript">
+            <input type="checkbox" id="javascript" name="mailingLists[]" value="Javascript">
+            Javascript
+        </label><br>
+        <label for="php">
+            <input type="checkbox" id="php" name="mailingLists[]" value="PHP">
+            PHP
+        </label><br>
+        <label for="html">
+            <input type="checkbox" id="html" name="mailingLists[]" value="HTML">
+            HTML
+        </label><br>
+        <label for="css">
+            <input type="checkbox" id="css" name="mailingLists[]" value="CSS">
+            CSS
+        </label><br>
+        <!-- Add more checkboxes for other programming languages or technologies -->
+    </fieldset>
+
+    <fieldset>
+        <legend>Industry Verticals</legend>
+        <label for="saas">
+            <input type="checkbox" id="saas" name="mailingLists[]" value="SaaS">
+            SaaS
+        </label><br>
+        <label for="healthTech">
+            <input type="checkbox" id="healthTech" name="mailingLists[]" value="Health Tech">
+            Health Tech
+        </label><br>
+        <label for="agtech">
+            <input type="checkbox" id="agtech" name="mailingLists[]" value="Ag tech">
+            Ag tech
+        </label><br>
+        <label for="industrialTech">
+            <input type="checkbox" id="industrialTech" name="mailingLists[]" value="Industrial Tech">
+            Industrial Tech
+        </label><br>
+        <!-- Add more checkboxes for other industry verticals -->
+    </fieldset>
+
     <a class="nav-link btn btn-primary rounded mx-auto d-block" href="confirmation">Next</a>
 </form>
 

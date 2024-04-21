@@ -35,14 +35,6 @@ $f3->route('GET|POST /apply', function($f3){
         $state = $_POST['state'];
         $phone = $_POST['phone'];
 
-        // Echo out form data to check
-        echo "First Name: $firstName<br>";
-        echo "Last Name: $lastName<br>";
-        echo "Email: $email<br>";
-        echo "State: $state<br>";
-        echo "Phone: $phone<br>";
-
-        // Store data in session using Fat-Free syntax
         $f3->set('SESSION.firstName', $firstName);
         $f3->set('SESSION.lastName', $lastName);
         $f3->set('SESSION.email', $email);
@@ -75,7 +67,6 @@ $f3->route('GET|POST /experience', function($f3){
         $experience = $_POST['experience'];
         $relocate = $_POST['relocate'];
 
-        // Store data in session using Fat-Free syntax
         $f3->set('SESSION.biography', $biography);
         $f3->set('SESSION.github', $github);
         $f3->set('SESSION.experience', $experience);
@@ -103,7 +94,6 @@ $f3->route('GET|POST /mailing-lists', function($f3){
         // Retrieve form data
         $mailingLists = $_POST['mailingLists'];
 
-        // Store data in session using Fat-Free syntax
         $f3->set('SESSION.mailingLists', $mailingLists);
 
         // Redirect to confirmation page
@@ -130,7 +120,7 @@ $f3->route('GET /confirmation', function($f3){
 
 
 // implode to kinda 'stringbuild'
-// $sdev = implode(", ", $_POST['sdev]);
+// variable = implode(", ", $_POST['variable']);
 
 // Run Fat-Free
 $f3->run();
