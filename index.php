@@ -43,29 +43,91 @@ $f3->route('GET|POST /apply', function($f3){
         $_SESSION['state'] = $state;
         $_SESSION['phone'] = $phone;
 
-        // Redirect to confirmation page
-        $f3->reroute('/personal-info');
+        // Redirect to experience page
+        $f3->reroute('/experience.html');
     } else
     {
 
         // If form is not submitted, render personal information page
         echo '<h1>Personal Information Page</h1>';
-
         // Render a view page
         $view = new Template();
         echo $view->render('views/personal-information.html');
     }
 });
 
+// Define experience route
+$f3->route('GET|POST /experience', function($f3){
+
+    // If form is submitted
+    if ($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+
+        // Retrieve form data
+        $biography = $_POST['biography'];
+        $github = $_POST['github'];
+        $experience = $_POST['experience'];
+        $relocate = $_POST['relocate'];
+
+        // Store data in session
+        $_SESSION['biography'] = $biography;
+        $_SESSION['github'] = $github;
+        $_SESSION['experience'] = $experience;
+        $_SESSION['relocate'] = $relocate;
+
+        // Redirect to confirmation page
+        $f3->reroute('/mailing-lists.html');
+    } else
+    {
+
+        // If form is not submitted, render experience page
+        echo '<h1>Experience Page</h1>';
+        // Render a view page
+        $view = new Template();
+        echo $view->render('views/experience.html');
+    }
+});
+
+// Define mailing lists route
+$f3->route('GET|POST /mailing-lists', function($f3){
+
+    // If form is submitted
+    if ($_SERVER['REQUEST_METHOD'] == 'POST')
+    {
+        // Retrieve selected mailing lists
+        $selectedLists = isset($_POST['mailingLists']) ? $_POST['mailingLists'] : [];
+
+        // Store selected lists in session
+        $_SESSION['mailingLists'] = $selectedLists;
+
+        // Redirect to confirmation page
+        $f3->reroute('/confirmation.html');
+    }
+    else
+    {
+        // If form is not submitted, render mailing lists page
+        echo '<h1>Mailing Lists Page</h1>';
+
+        // Render a view page
+        $view = new Template();
+        echo $view->render('views/mailing-lists.html');
+    }
+});
+
 // Define confirmation route
-$f3->route('GET|POST /confirmation', function($f3){
+$f3->route('GET /confirmation', function($f3){
 
     // Render confirmation page
     echo '<h1>Confirmation Page</h1>';
+
     // Render a view page
     $view = new Template();
     echo $view->render('views/confirmation.html');
 });
+
+
+// implode to kinda 'stringbuild'
+// $sdev = implode(", ", $_POST['sdev]);
 
 // Run Fat-Free
 $f3->run();

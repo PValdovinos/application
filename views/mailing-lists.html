@@ -1,0 +1,25 @@
+<include href="views/header.html"></include>
+</head>
+<body>
+
+<h1>Mailing Lists Page</h1>
+
+<!-- Form for mailing list subscriptions -->
+<form method="post" action="/mailing-lists">
+    <label for="softwareJobs">
+        <input type="checkbox" id="softwareJobs" name="mailingLists[]" value="Software Development Jobs">
+        Software Development Jobs
+    </label><br>
+    <label for="industryVerticals">
+        <input type="checkbox" id="industryVerticals" name="mailingLists[]" value="Industry Verticals">
+        Industry Verticals
+    </label><br>
+    <a class="nav-link btn btn-primary rounded mx-auto d-block" href="confirmation">Next</a>
+</form>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
