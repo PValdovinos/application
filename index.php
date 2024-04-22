@@ -95,7 +95,8 @@ $f3->route('GET|POST /mailing-lists', function($f3){
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Retrieve form data
-        $mailingLists = $_POST['mailingLists'];
+        //$mailingLists = $_POST['mailingLists'];
+        $mailingLists = implode(", ", $_POST['mailingLists']);
 
         // Store data in session
         $f3->set('SESSION.mailingLists', $mailingLists);
