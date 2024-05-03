@@ -2,20 +2,20 @@
 
 // Pedro Valdovinos Reyes, 4/19/2024, php to instantiate F3 and go through Application pages
 
+// Start the session
+session_start();
+
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 // Include the Fat-Free Framework
 require_once ('vendor/autoload.php');
 
-// Start the session
-session_start();
-
 // Instantiate base class
 $f3 = Base::instance();
 
 // Define a default route
-$f3->route('GET /', function($f3){
+$f3->route('GET /', function(){
 
     // Render the home page
     $view = new Template();
@@ -95,14 +95,14 @@ $f3->route('GET|POST /mailing-lists', function($f3){
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Retrieve form data
-        //$mailingLists = $_POST['mailingLists'];
-        $mailingLists = implode(", ", $_POST['mailingLists']);
+        $selectedMailingLists = isset($_POST['mailingLists']) ? $_POST['mailingLists'] : array();
+        $mailingLists = implode(", ", $selectedMailingLists);
 
         // Store data in session
         $f3->set('SESSION.mailingLists', $mailingLists);
 
         // Redirect to confirmation page
-        $f3->reroute('/confirmation.html');
+        $f3->reroute('/confirmation');
     } else {
         // If form is not submitted, render mailing-lists page
         echo '<h1>Mailing Lists Page</h1>';
@@ -114,6 +114,8 @@ $f3->route('GET|POST /mailing-lists', function($f3){
 
 // Define confirmation route
 $f3->route('GET /confirmation', function($f3){
+
+    var_dump($_SESSION);
 
     // Render confirmation page
     echo '<h1>Confirmation Page</h1>';
