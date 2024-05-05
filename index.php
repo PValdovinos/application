@@ -11,6 +11,8 @@ error_reporting(E_ALL);
 // Include the Fat-Free Framework
 require_once ('vendor/autoload.php');
 require_once ('model/validate.php');
+var_dump($_SESSION);
+
 
 // Instantiate base class
 $f3 = Base::instance();
@@ -38,7 +40,6 @@ $f3->route('GET|POST /apply', function($f3){
         $phone = $_POST['phone'];
 
         // Validation
-        $errors = array();
         if (!validName($firstName)) {
             $errors['firstName'] = 'Invalid first name';
         }
@@ -65,7 +66,8 @@ $f3->route('GET|POST /apply', function($f3){
             // Redirect to experience page
             $f3->reroute('/experience.html');
         }
-    } else
+    }
+    else
     {
         // If form is not submitted, render personal information page
         echo '<h1>Personal Information Page</h1>';
