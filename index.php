@@ -45,13 +45,13 @@ $f3->route('GET|POST /apply', function($f3){
             $f3->set('errors["firstName"]', 'Invalid first name');
         }
         if (!validName($lastName)) {
-            $errors['lastName'] = 'Invalid last name';
+            $f3->set('errors["lastName"]', 'Invalid first name');
         }
         if (!validEmail($email)) {
-            $errors['email'] = 'Invalid email address';
+            $f3->set('errors["email"]', 'Invalid first name');
         }
         if (!validPhone($phone)) {
-            $errors['phone'] = 'Invalid phone number';
+            $f3->set('errors["phone"]', 'Invalid first name');
         }
 
         if (empty($f3->get('errors')))
@@ -64,7 +64,7 @@ $f3->route('GET|POST /apply', function($f3){
             $f3->set('SESSION.phone', $phone);
 
             // Redirect to experience page
-            $f3->reroute('/experience.html');
+            $f3->reroute('experience');
         }
     }
     else
@@ -91,15 +91,29 @@ $f3->route('GET|POST /experience', function($f3){
         $experience = $_POST['experience'];
         $relocate = $_POST['relocate'];
 
-        // Store data in session
-        $f3->set('SESSION.biography', $biography);
-        $f3->set('SESSION.github', $github);
-        $f3->set('SESSION.experience', $experience);
-        $f3->set('SESSION.relocate', $relocate);
 
-        // Redirect to mailing lists page
-        $f3->reroute('/mailing-lists.html');
-    } else
+        // Validate form data
+        if (!validGithub($github)) {
+            $f3->set('errors["github"]', 'Invalid GitHub username');
+        }
+        if (!validExperience($experience)) {
+            $f3->set('errors["experience"]', 'Invalid experience');
+        }
+
+        if (empty($f3->get('errors')))
+        {
+            // Store data in session
+            $f3->set('SESSION.biography', $biography);
+            $f3->set('SESSION.github', $github);
+            $f3->set('SESSION.experience', $experience);
+            $f3->set('SESSION.relocate', $relocate);
+
+            // Redirect to mailing lists page
+            $f3->reroute('mailing-lists');
+        }
+
+    }
+    else
     {
 
         // If form is not submitted, render experience page
@@ -121,18 +135,28 @@ $f3->route('GET|POST /mailing-lists', function($f3){
         $selectedMailingLists = isset($_POST['mailingLists']) ? $_POST['mailingLists'] : array();
         $mailingLists = implode(", ", $selectedMailingLists);
 
-        // Store data in session
-        $f3->set('SESSION.mailingLists', $mailingLists);
+        if(empty($selectedMailingLists))
+        {
+            $f3->set('errors["mailingLists"]', 'Please select at least one mailing list');
+        }
 
-        // Redirect to confirmation page
-        $f3->reroute('/confirmation');
+        if (empty($f3->get('errors')))
+        {
+            // Store data in session
+            $f3->set('SESSION.mailingLists', $mailingLists);
+
+            // Redirect to confirmation page
+            $f3->reroute('confirmation');
+        }
     }
+    else {
 
-    // If form is not submitted, render mailing-lists page
-    echo '<h1>Mailing Lists Page</h1>';
-    // Render a view page
-    $view = new Template();
-    echo $view->render('views/mailing-lists.html');
+        // If form is not submitted, render mailing-lists page
+        echo '<h1>Mailing Lists Page</h1>';
+        // Render a view page
+        $view = new Template();
+        echo $view->render('views/mailing-lists.html');
+    }
 
 });
 
