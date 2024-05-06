@@ -11,7 +11,6 @@ error_reporting(E_ALL);
 // Include the Fat-Free Framework
 require_once ('vendor/autoload.php');
 require_once ('model/validate.php');
-var_dump($_SESSION);
 
 
 // Instantiate base class
@@ -27,10 +26,12 @@ $f3->route('GET /', function(){
 
 // Define apply route
 $f3->route('GET|POST /apply', function($f3){
+    var_dump($f3->get('SESSION'));
 
     // If form is submitted
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
+        var_dump($_POST);
 
         // Retrieve form data
         $firstName = $_POST['firstName'];
@@ -41,7 +42,7 @@ $f3->route('GET|POST /apply', function($f3){
 
         // Validation
         if (!validName($firstName)) {
-            $errors['firstName'] = 'Invalid first name';
+            $f3->set('errors["firstName"]', 'Invalid first name');
         }
         if (!validName($lastName)) {
             $errors['lastName'] = 'Invalid last name';
@@ -53,9 +54,8 @@ $f3->route('GET|POST /apply', function($f3){
             $errors['phone'] = 'Invalid phone number';
         }
 
-        if (!empty($errors)) {
-            $f3->set('errors', $errors);
-        } else {
+        if (empty($f3->get('errors')))
+        {
             // Store data in session
             $f3->set('SESSION.firstName', $firstName);
             $f3->set('SESSION.lastName', $lastName);
@@ -79,6 +79,7 @@ $f3->route('GET|POST /apply', function($f3){
 
 // Define experience route
 $f3->route('GET|POST /experience', function($f3){
+    var_dump($f3->get('SESSION'));
 
     // If form is submitted
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -111,6 +112,7 @@ $f3->route('GET|POST /experience', function($f3){
 
 // Define mailing lists route
 $f3->route('GET|POST /mailing-lists', function($f3){
+    var_dump($f3->get('SESSION'));
 
     // If form is submitted
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -136,8 +138,9 @@ $f3->route('GET|POST /mailing-lists', function($f3){
 
 // Define confirmation route
 $f3->route('GET /confirmation', function($f3){
+    var_dump($f3->get('SESSION'));
 
-    var_dump($_SESSION);
+    //var_dump($_SESSION);
 
     // Render confirmation page
     echo '<h1>Confirmation Page</h1>';
