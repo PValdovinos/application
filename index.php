@@ -45,16 +45,18 @@ $f3->route('GET|POST /apply', function($f3){
             $f3->set('errors["firstName"]', 'Invalid first name');
         }
         if (!validName($lastName)) {
-            $f3->set('errors["lastName"]', 'Invalid first name');
+            $f3->set('errors["lastName"]', 'Invalid last name');
         }
         if (!validEmail($email)) {
-            $f3->set('errors["email"]', 'Invalid first name');
+            $f3->set('errors["email"]', 'Invalid email');
         }
         if (!validPhone($phone)) {
-            $f3->set('errors["phone"]', 'Invalid first name');
+            $f3->set('errors["phone"]', 'Invalid phone number');
         }
 
-        if (empty($f3->get('errors')))
+        // TO DO: Fix if(errors)
+        //if (empty($f3->get('errors')))
+        if(true)
         {
             // Store data in session
             $f3->set('SESSION.firstName', $firstName);
@@ -100,7 +102,9 @@ $f3->route('GET|POST /experience', function($f3){
             $f3->set('errors["experience"]', 'Invalid experience');
         }
 
-        if (empty($f3->get('errors')))
+        // TO DO: Fix if(errors)
+        //if (empty($f3->get('errors')))
+        if(true)
         {
             // Store data in session
             $f3->set('SESSION.biography', $biography);
@@ -140,7 +144,9 @@ $f3->route('GET|POST /mailing-lists', function($f3){
             $f3->set('errors["mailingLists"]', 'Please select at least one mailing list');
         }
 
-        if (empty($f3->get('errors')))
+        // TO DO: Fix if(errors)
+        //if (empty($f3->get('errors')))
+        if(true)
         {
             // Store data in session
             $f3->set('SESSION.mailingLists', $mailingLists);
@@ -161,7 +167,7 @@ $f3->route('GET|POST /mailing-lists', function($f3){
 });
 
 // Define confirmation route
-$f3->route('GET /confirmation', function($f3){
+$f3->route('GET|POST /confirmation', function($f3){
     var_dump($f3->get('SESSION'));
 
     //var_dump($_SESSION);

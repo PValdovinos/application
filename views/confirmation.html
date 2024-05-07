@@ -22,11 +22,9 @@
 
 <div>
     <h3>Mailing Lists:</h3>
-    <ul>
-        <repeat group="{{ @SESSION.mailingLists }}" value="{{ @list }}">
-            <li>{{ @list }}</li>
-        </repeat>
-    </ul>
+
+        <p> {{ @SESSION.mailingLists}}
+        </p>
 </div>
 
 <!-- Submit button (does nothing) -->
