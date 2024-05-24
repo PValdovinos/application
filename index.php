@@ -24,7 +24,6 @@ $f3->route('GET /', function(){
 
 // Define apply route
 $f3->route('GET|POST /apply', function($f3){
-    var_dump($f3->get('SESSION'));
 
     // If form is submitted
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -37,6 +36,7 @@ $f3->route('GET|POST /apply', function($f3){
         $email = $_POST['email'];
         $state = $_POST['state'];
         $phone = $_POST['phone'];
+        $optInMailingList = isset($_POST['optInMailingList']);
 
         // Validation
         /*if (!validName($firstName)) {
@@ -62,6 +62,7 @@ $f3->route('GET|POST /apply', function($f3){
             $f3->set('SESSION.email', $email);
             $f3->set('SESSION.state', $state);
             $f3->set('SESSION.phone', $phone);
+            $f3->set('SESSION.optInMailingList', $optInMailingList);
 
             // Redirect to experience page
             $f3->reroute('experience');
@@ -79,7 +80,6 @@ $f3->route('GET|POST /apply', function($f3){
 
 // Define experience route
 $f3->route('GET|POST /experience', function($f3){
-    var_dump($f3->get('SESSION'));
 
     // If form is submitted
     if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -110,14 +110,20 @@ $f3->route('GET|POST /experience', function($f3){
             $f3->set('SESSION.experience', $experience);
             $f3->set('SESSION.relocate', $relocate);
 
-            // Redirect to mailing lists page
-            $f3->reroute('mailing-lists');
+            // Redirect to mailing lists page or confirmation depending on checked-box
+            if ($f3->get('SESSION.optInMailingList'))
+            {
+                $f3->reroute('mailing-lists');
+            }
+            else
+            {
+                $f3->reroute('confirmation');
+            }
         }
 
     }
     else
     {
-
         // If form is not submitted, render experience page
         echo '<h1>Experience Page</h1>';
         // Render a view page
@@ -128,7 +134,6 @@ $f3->route('GET|POST /experience', function($f3){
 
 // Define mailing lists route
 $f3->route('GET|POST /mailing-lists', function($f3){
-    var_dump($f3->get('SESSION'));
 
     // If form is submitted
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -166,8 +171,6 @@ $f3->route('GET|POST /mailing-lists', function($f3){
 
 // Define confirmation route
 $f3->route('GET|POST /confirmation', function($f3){
-    var_dump($f3->get('SESSION'));
-
     //var_dump($_SESSION);
 
     // Render confirmation page
