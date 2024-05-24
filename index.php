@@ -10,8 +10,6 @@ error_reporting(E_ALL);
 
 // Include the Fat-Free Framework
 require_once ('vendor/autoload.php');
-require_once ('model/validate.php');
-
 
 // Instantiate base class
 $f3 = Base::instance();
@@ -41,7 +39,7 @@ $f3->route('GET|POST /apply', function($f3){
         $phone = $_POST['phone'];
 
         // Validation
-        if (!validName($firstName)) {
+        /*if (!validName($firstName)) {
             $f3->set('errors["firstName"]', 'Invalid first name');
         }
         if (!validName($lastName)) {
@@ -52,7 +50,7 @@ $f3->route('GET|POST /apply', function($f3){
         }
         if (!validPhone($phone)) {
             $f3->set('errors["phone"]', 'Invalid phone number');
-        }
+        }*/
 
         // TO DO: Fix if(errors)
         //if (empty($f3->get('errors')))
@@ -95,12 +93,12 @@ $f3->route('GET|POST /experience', function($f3){
 
 
         // Validate form data
-        if (!validGithub($github)) {
+        /*if (!validGithub($github)) {
             $f3->set('errors["github"]', 'Invalid GitHub username');
         }
         if (!validExperience($experience)) {
             $f3->set('errors["experience"]', 'Invalid experience');
-        }
+        }*/
 
         // TO DO: Fix if(errors)
         //if (empty($f3->get('errors')))
